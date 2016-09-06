@@ -18,7 +18,8 @@
     "package": "cross-env NODE_ENV=production node -r babel-register -r babel-polyfill package.js",
     "package-all": "npm run package -- --all",
     "postinstall": "node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
-    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\""
+    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
+    "jest": "jest --watch"
   },
   "bin": {
     "electron": "./node_modules/.bin/electron"
@@ -50,6 +51,7 @@
     "asar": "^0.12.2",
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
+    "babel-jest": "^15.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",
@@ -71,6 +73,7 @@
     "electron-devtools-installer": "^2.0.1",
     "electron-packager": "^7.7.0",
     "electron-rebuild": "^1.2.0",
+    "enzyme": "^2.4.1",
     "eslint": "^3.3.1",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-import-resolver-webpack": "^0.5.1",
@@ -80,6 +83,7 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "fbjs-scripts": "^0.7.1",
+    "jest": "^15.1.1",
     "jsdom": "^9.4.2",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
