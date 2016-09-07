@@ -8,14 +8,22 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import './app.global.css';
 
-const remote = require('electron').remote;
-const appPath = remote.app.getAppPath();
-console.log('appPath: ', appPath);
+// const remote = require('electron').remote;
+// const appPath = remote.app.getAppPath();
+// console.log('appPath: ', appPath);
+//
+// const irisPath = `/${appPath}/app/data/iris.json`;
+// const irisData = JSON.parse(fs.readFileSync(irisPath, 'utf8'));
+// console.log('irisData: ', irisData);
 
-const irisPath = `/${appPath}/app/data/iris.json`;
+import path from 'path';
+import { remote } from 'electron';
+
+const irisPath = path.join(remote.app.getPath('appData'), '/electron-react-boilerplate/iris.json');
+console.log('irisPath: ', irisPath);
+
 const irisData = JSON.parse(fs.readFileSync(irisPath, 'utf8'));
 console.log('irisData: ', irisData);
-
 
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
