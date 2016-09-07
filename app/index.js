@@ -16,15 +16,6 @@ import './app.global.css';
 // const irisData = JSON.parse(fs.readFileSync(irisPath, 'utf8'));
 // console.log('irisData: ', irisData);
 
-import path from 'path';
-import { remote } from 'electron';
-
-const irisPath = path.join(remote.app.getPath('appData'), '/electron-react-boilerplate/iris.json');
-console.log('irisPath: ', irisPath);
-
-const irisData = JSON.parse(fs.readFileSync(irisPath, 'utf8'));
-console.log('irisData: ', irisData);
-
 const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 
