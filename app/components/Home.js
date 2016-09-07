@@ -5,6 +5,7 @@ import styles from './Home.css';
 
 export default class Home extends Component {
   render() {
+    // debugger
     return (
       <div>
         <div className={styles.container}>
