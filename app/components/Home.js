@@ -10,6 +10,20 @@ export default class Home extends Component {
         <div className={styles.container}>
           <h2>Home</h2>
           <Link to="/counter">to Counter</Link>
+          <div className="row">
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+            <div className="col-md-1">.col-md-1</div>
+          </div>
         </div>
       </div>
     );
