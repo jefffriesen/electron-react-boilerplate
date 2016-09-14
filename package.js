@@ -28,11 +28,22 @@ const DEFAULT_OPTS = {
     '^/test($|/)',
     '^/release($|/)',
     '^/main.development.js'
-  ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
+  ].concat(devDeps.map(name => {
+    console.log('ignoring devDeps: ', name)
+    return `/node_modules/${name}($|/)`
+  }))
   .concat(
     deps.filter(name => !electronCfg.externals.includes(name))
-      .map(name => `/node_modules/${name}($|/)`)
+      .map(name => {
+        console.log('ignoring electronCfg.externals: ', name)
+        return `/node_modules/${name}($|/)`
+      })
   )
+  // ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
+  // .concat(
+  //   deps.filter(name => !electronCfg.externals.includes(name))
+  //     .map(name => `/node_modules/${name}($|/)`)
+  // )
 };
 
 const icon = argv.icon || argv.i || 'app/app';
