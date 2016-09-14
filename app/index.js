@@ -8,8 +8,6 @@ import configureStore from './store/configureStore';
 import './app.global.css';
 
 // Notes:
-// * packaging-test: Importing bootstrap on packaging-test works if
-//   ignoring so putting them in a non-ignored directory should work
 
 // * fs-test: packaging finds iris.json just fine, npm run dev doesn't
 //   trying graceful-fs with no luck
