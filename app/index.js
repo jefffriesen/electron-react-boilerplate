@@ -40,6 +40,14 @@ import './app.global.css';
 // appPath              :  /Users/jeffers/git/forks/electron-react-boilerplate/node_modules/electron/dist/Electron.app/Contents/Resources/default_app.asar
 // process.resourcesPath:  /Users/jeffers/git/forks/electron-react-boilerplate/node_modules/electron/dist/Electron.app/Contents/Resources
 
+// The diffference between working and not working on dev are these two lines:
+// "start": "cross-env NODE_ENV=production electron ./",
+// "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./main.development",
+// Setting NODE_ENV=production in start-hot doesn't fix it, so that leaves either:
+// 1. babel-register and babel-polyfill
+// or
+// 2. main.js (works) vs. main.development.js (doesn't work)
+
 import fs from 'fs';
 
 const remote = require('electron').remote;
