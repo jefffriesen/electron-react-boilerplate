@@ -57,9 +57,10 @@ console.log('process.resourcesPath: ', process.resourcesPath)
 
 
 const irisPath0 = `${appPath}/app/data/iris.json`;
-const irisPath1 = `${process.resourcesPath}/app/data/iris.json`
+const irisPath1 = `${process.resourcesPath}/app/data/iris.json`;
+const irisPath2 = `${appPath}/data/iris.json`;
 
-const irisData = JSON.parse(fs.readFileSync(irisPath0, 'utf8'));
+const irisData = JSON.parse(fs.readFileSync(irisPath2, 'utf8'));
 console.log('irisData: ', irisData);
 
 
