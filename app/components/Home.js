@@ -4,8 +4,12 @@ import styles from './Home.css';
 
 
 export default class Home extends Component {
+
   render() {
-    // debugger
+    console.log('NODE_ENV', process.env.NODE_ENV);
+    const abc = 'temp var';
+    debugger;
+    console.log('abc: ', abc);
     return (
       <div>
         <div className={styles.container}>

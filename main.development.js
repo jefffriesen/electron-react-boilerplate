@@ -29,6 +29,7 @@ const installExtensions = async () => {
         await installer.default(installer[name], forceDownload);
       } catch (e) {} // eslint-disable-line
     }
+
   }
 };
 
@@ -43,20 +44,16 @@ app.on('ready', async () => {
 
   mainWindow.loadURL(`file://${__dirname}/app/app.html`);
 
-  mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.show();
-    mainWindow.focus();
-  });
-
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
-
   if (process.env.NODE_ENV === 'development') {
     mainWindow.openDevTools();
+    mainWindow.webContents.on('devtools-opened', () => {
+      setImmediate(() => {
+        mainWindow.show();
+        // mainWindow.focus();
+      });
+    });
     mainWindow.webContents.on('context-menu', (e, props) => {
       const { x, y } = props;
-
       Menu.buildFromTemplate([{
         label: 'Inspect element',
         click() {
@@ -64,7 +61,16 @@ app.on('ready', async () => {
         }
       }]).popup(mainWindow);
     });
+  } else {
+    mainWindow.webContents.on('did-finish-load', () => {
+      mainWindow.show();
+      mainWindow.focus();
+    });
   }
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 
   if (process.platform === 'darwin') {
     template = [{
