@@ -1,18 +1,19 @@
 import { Application } from 'spectron';
 import { expect } from 'chai';
 import electronPath from 'electron';
+import path from 'path';
 import homeStyles from '../app/components/Home.css';
 import counterStyles from '../app/components/Counter.css';
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 describe('main window', function spec() {
-  this.timeout(5000);
+  this.timeout(10000);
 
   before(async () => {
     this.app = new Application({
       path: electronPath,
-      args: ['.'],
+      args: [path.join(__dirname, '..', 'app')],
     });
     return this.app.start();
   });

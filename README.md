@@ -13,9 +13,12 @@
 
 ## Screenshot
 
-![](https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif)
+![Electron Boilerplate Demo](https://cloud.githubusercontent.com/assets/3382565/10557547/b1f07a4e-74e3-11e5-8d27-79ab6947d429.gif)
 
 ## Install
+
+* **Note: requires a node version >= 6 and an npm version >= 3.**
+* **If you have installation or compilation issues with this project, please see [our debugging guide](https://github.com/chentsulin/electron-react-boilerplate/issues/400)**
 
 First, clone the repo via git:
 
@@ -24,15 +27,17 @@ git clone https://github.com/chentsulin/electron-react-boilerplate.git your-proj
 ```
 
 And then install dependencies.
+**ProTip**: Install with [yarn](https://github.com/yarnpkg/yarn) for faster and safer installation
 
 ```bash
 $ cd your-project-name && npm install
 ```
 
+:bulb: *In order to remove boilerplate sample code, simply run `npm run cleanup`. After this is run, the initial sample boilerplate code will be removed in order for a clean project for starting custom dev*
 
 ## Run
 
-Run this two commands __simultaneously__ in different console tabs.
+Run these two commands __simultaneously__ in different console tabs.
 
 ```bash
 $ npm run hot-server
@@ -45,8 +50,22 @@ or run two servers with one command
 $ npm run dev
 ```
 
-*Note: requires a node version >= 4 and an npm version >= 2.*
+## Editor Configuration
+**Atom**
+```bash
+apm install editorconfig es6-javascript autocomplete-flow javascript-snippets linter linter-eslint language-babel
+```
 
+**Sublime**
+* https://github.com/sindresorhus/editorconfig-sublime#readme
+* https://github.com/SublimeLinter/SublimeLinter3
+* https://github.com/roadhump/SublimeLinter-eslint
+* https://github.com/babel/babel-sublime
+
+**Others**
+* [Editorconfig](http://editorconfig.org/#download)
+* [ESLint](http://eslint.org/docs/user-guide/integrations#editors)
+* Babel Syntax Plugin
 
 ## DevTools
 
@@ -79,7 +98,7 @@ $ set UPGRADE_EXTENSIONS=1 && npm run dev
 
 ## Externals
 
-If you use any 3rd party libraries which can't be built with webpack, you must list them in your `webpack.config.base.js`：
+If you use any 3rd party libraries which can't or won't be built with webpack, you must list them in your `webpack.config.base.js`：
 
 ```javascript
 externals: [
@@ -87,7 +106,11 @@ externals: [
 ]
 ```
 
-You can find those lines in the file.
+For a common example, to install bcrypt, `npm i --save bcrypt`, and make sure to list bcrypt in externals in `webpack.config.base.js` or the app won't include them in the package:
+```js
+externals: ['bcrypt']
+```
+
 
 
 ## CSS Modules
@@ -99,8 +122,16 @@ All `.css` file extensions will use css-modules unless it has `.global.css`.
 If you need global styles, stylesheets with `.global.css` will not go through the
 css-modules loader. e.g. `app.global.css`
 
+If you want to import global css libraries (like `bootstrap`), you can just write the following code in `.global.css`:
 
-## Package
+```css
+@import "~bootstrap/dist/css/bootstrap.css";
+```
+
+
+## Packaging
+
+To package apps for the local platform:
 
 ```bash
 $ npm run package
@@ -108,6 +139,9 @@ $ npm run package
 
 To package apps for all platforms:
 
+First, refer to [Multi Platform Build](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) for dependencies.
+
+Then,
 ```bash
 $ npm run package-all
 ```
@@ -120,38 +154,27 @@ $ npm run package -- --[option]
 
 #### Options
 
-- --name, -n: Application name (default: ElectronReact)
-- --version, -v: Electron version (default: latest version)
-- --asar, -a: [asar](https://github.com/atom/asar) support (default: false)
-- --icon, -i: Application icon
-- --all: pack for all platforms
+See [electron-builder CLI Usage](https://github.com/electron-userland/electron-builder#cli-usage)
 
-Use `electron-packager` to pack your app with `--all` options for darwin (osx), linux and win32 (windows) platform. After build, you will find them in `release` folder. Otherwise, you will only find one for your os.
+#### Module Structure
 
-`test`, `tools`, `release` folder and devDependencies in `package.json` will be ignored by default.
-
-#### Default Ignore modules
-
-We add some module's `peerDependencies` to ignore option as default for application size reduction.
-
-- `babel-core` is required by `babel-loader` and its size is ~19 MB
-- `node-libs-browser` is required by `webpack` and its size is ~3MB.
-
-> **Note:** If you want to use any above modules in runtime, for example: `require('babel/register')`, you should move them from `devDependencies` to `dependencies`.
+This boilerplate uses a [two package.json structure](https://github.com/electron-userland/electron-builder#two-packagejson-structure).
 
 #### Building windows apps from non-windows platforms
+1. If the module is native to a platform or otherwise should be included with the published package (i.e. bootstrap, openbci), it should be listed under `dependencies` in `./app/package.json`.
+2. If a module is `import`ed by another module, include it in `dependencies` in `./package.json`.   See [this ESLint rule](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md)
+3. Otherwise, modules used for building, testing and debugging should be included in `devDependencies` in `./package.json`.
 
-Please checkout [Building windows apps from non-windows platforms](https://github.com/maxogden/electron-packager#building-windows-apps-from-non-windows-platforms).
+## Static Type Checking
+This project comes with Flow support out of the box! You can annotate your code with types, [get Flow errors as ESLint errors](https://github.com/amilajack/eslint-plugin-flowtype-errors), and get [type errors during runtime](https://github.com/gcanti/babel-plugin-tcomb-boilerplate) during development. Types are completely optional.
+
+## Native-like UI
+
+If you want to have native-like User Interface (OS X El Capitan and Windows 10), [react-desktop](https://github.com/gabrielbull/react-desktop) may perfect suit for you.
 
 ## Dispatching redux actions from main process
 
 see discusses in [#118](https://github.com/chentsulin/electron-react-boilerplate/issues/118) and [#108](https://github.com/chentsulin/electron-react-boilerplate/issues/108)
-
-## How hot-reloading works on Electron
-
-We use [webpack-target-electron-renderer](https://github.com/chentsulin/webpack-target-electron-renderer) to provide a build target for electron renderer process. Read more information [here](https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works).
-
-> Note: webpack >= 1.12.15 has built-in support for `electron-main` and `electron-renderer` targets.
 
 ## How to keep the boilerplate updated
 
@@ -167,15 +190,11 @@ Then, use git to merge some latest commits:
 git pull upstream master
 ```
 
-## Native-like UI
-
-If you want to have native-like User Interface (OS X El Capitan and Windows 10), [react-desktop](https://github.com/gabrielbull/react-desktop) may perfect suit for you.
-
-
 ## Maintainers
 
 - [C. T. Lin](https://github.com/chentsulin)
 - [Jhen-Jie Hong](https://github.com/jhen0409)
+- [Amila Welihinda](https://github.com/amilajack)
 
 
 ## License
