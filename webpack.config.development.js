@@ -15,7 +15,30 @@ const port = process.env.PORT || 3000;
 export default validate(merge(baseConfig, {
   debug: true,
 
-  devtool: 'cheap-module-eval-source-map',
+  // doesn't work, has error: ERROR:CONSOLE(1531)] "TypeError: Cannot read property 'requestContent' of undefined
+  // devtool: 'cheap-module-eval-source-map',
+
+  // works
+  // devtool: 'source-map',
+
+  // works
+  // devtool: 'eval',
+
+  // works but has error: ERROR:CONSOLE(1531)] "TypeError: Cannot read property 'requestContent' of undefined
+  // devtool: 'cheap-eval-source-map',
+
+  // works
+  devtool: 'cheap-source-map',
+
+  // doesn't work
+  // devtool: 'cheap-module-source-map',
+
+  // works but has error: ERROR:CONSOLE(1531)] "TypeError: Cannot read property 'requestContent' of undefined
+  // devtool: 'eval-source-map',
+
+  // works
+  // devtool: 'source-map',
+
 
   entry: [
     `webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
