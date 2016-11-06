@@ -28,7 +28,7 @@ export default validate(merge(baseConfig, {
   // devtool: 'cheap-eval-source-map',
 
   // works
-  devtool: 'cheap-source-map',
+  // devtool: 'cheap-source-map',
 
   // doesn't work
   // devtool: 'cheap-module-source-map',
@@ -38,6 +38,12 @@ export default validate(merge(baseConfig, {
 
   // works
   // devtool: 'source-map',
+
+  // works
+  devtool: 'inline-source-map',
+
+  // works
+  // devtool: 'hidden-source-map',
 
 
   entry: [
