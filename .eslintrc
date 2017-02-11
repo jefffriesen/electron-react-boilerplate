@@ -8,11 +8,13 @@
   },
   "rules": {
     "arrow-parens": ["off"],
+    "compat/compat": 2,
     "consistent-return": "off",
     "comma-dangle": "off",
     "generator-star-spacing": "off",
     "import/no-unresolved": ["error", { "ignore": ["electron"] }],
     "import/no-extraneous-dependencies": "off",
+    "no-console": 0,
     "no-use-before-define": "off",
     "promise/param-names": 2,
     "promise/always-return": 2,
@@ -28,6 +30,7 @@
     "flowtype-errors",
     "import",
     "promise",
+    "compat",
     "react"
   ],
   "settings": {
